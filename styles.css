@@ -1,12 +1,16 @@
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 50px;
+    height: 100vh;
+    font-size: 18px;
 }
 
 main {
     max-width: 600px;
     margin: 0 auto;
+    display: grid;
+    align-content: center;
+    height: 100%;
 }
 
 input[type="email"] {
@@ -24,6 +28,7 @@ button {
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
