@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>AIぬりえアプリ - ズカンドットコム</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="こどもが塗り絵をつくれる、AIぬりえアプリがもうすぐ登場します">
+    <meta name="og:title" content="AIぬりえアプリ">
+    <meta name="og:site_name" content="ズカンドットコム">
+    <meta name="og:type" content="website">
+    <meta name="og:image" content="https://coloring.zukan.com/image/PR_23.11-1.png">
     <link rel="icon" type="image/png" href="https://zukan.com/static/img/favicon.png?rev=2">
 </head>
+
 <body>
-    <main>
-        <h1>こどもが塗り絵をつくれる、AIぬりえアプリがもうすぐ登場します</h1>
-        <p>最新情報をお届けします。ニュースレターを購読してお待ちください。</p>
-        <form id="newsletter-form" action="https://pr.zukan.com/subscribe" method="POST" accept-charset="utf-8">
-            <input type="email" name="email" id="email" placeholder="メールアドレスを入力" required>
-            <input type="hidden" name="list" value="FR8uLSg0v8KIg3MLeHCqUw"/>
-            <input type="hidden" name="subform" value="yes"/>
-            <button type="submit">購読する</button>
+    <main class="grid min-h-full mx-auto max-w-4xl place-items-center px-6 py-24 sm:py-32 lg:px-8 text-center">
+        <h1 class="font-sans text-3xl font-bold sm:text-5xl">こどもが塗り絵をつくれる、AIぬりえアプリがもうすぐ登場します</h1>
+        <img class="py-8 max-w-full" src="image/PR_23.11-1.png">
+        <p class="my-6 text-base leading-7 text-gray-600">最新情報をお届けします。ニュースレターを購読してお待ちください。</p>
+        <form action="https://pr.zukan.com/subscribe" method="POST" accept-charset="utf-8">
+            <input type="hidden" name="list" value="FR8uLSg0v8KIg3MLeHCqUw" />
+            <input type="hidden" name="subform" value="yes" />
+            <div class="flex gap-2">
+                <input type="email" name="email" placeholder="メールアドレスを入力" required
+                    class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full leading-6 text-slate-900 placeholder-slate-400 rounded-md pl-4 ring-2 ring-slate-200 shadow-sm">
+                <button
+                    class="rounded-md bg-blue-600 px-8 py-2.5 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                    type="submit">購読する</button>
+            </div>
         </form>
-        <p class="message">
-            購読解除は配信されるメールより行えます。<a href="https://zukan.com/privacy">プライバシーポリシー</a>をご確認ください。
+        <p class="mt-6 text-base leading-7 text-gray-400">
+            購読解除は配信されるメールより行えます。<a href="https://zukan.com/privacy" class="font-semibold">プライバシーポリシー</a>をご確認ください。
         </p>
-        <a href="https://corp.zukan.com">
-            <img src="image/zukan_logo_180@2x.png" width="180" alt="株式会社ズカンドットコム" title="株式会社ズカンドットコム">
-        </a>
+        <div class="py-16">
+            <a href="https://corp.zukan.com">
+                <img src="image/zukan_logo_180@2x.png" width="180" alt="株式会社ズカンドットコム" title="株式会社ズカンドットコム">
+            </a>
+        </div>
     </main>
     <script src="script.js"></script>
 </body>
+
 </html>
