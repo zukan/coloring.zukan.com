@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchNurieData() {
   try {
-    const response = await fetch("https://api-coloring.zukan.com/v1/nuries?site=com.zukan.coloring");
+    const response = await fetch("https://api-coloring.zukan.com/v1/nuries?site=com.zukan.coloring&t=25032");
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
     }
