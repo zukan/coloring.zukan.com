@@ -73,7 +73,7 @@ function displayNurieGrid(container, nuries) {
 
 function createNurieCard(nurie) {
   const card = document.createElement("div");
-  card.classList.add("rounded-lg", "overflow-hidden", "shadow-md", "bg-white", "transition-transform", "duration-300", "hover:shadow-lg", "hover:-translate-y-1", "cursor-pointer");
+  card.classList.add("rounded-lg", "overflow-hidden", "shadow-md", "bg-white", "transition-transform", "duration-300", "hover:shadow-lg", "hover:-translate-y-1");
 
   // Get the image URL from the API response
   const imageUrl = nurie.media.image.thumbnail_url;
@@ -85,6 +85,8 @@ function createNurieCard(nurie) {
         alt="${nurie.name}" 
         class="w-full h-full object-cover"
         loading="lazy"
+        alt="${nurie.name}"
+        title="${nurie.name}"
       />
     </div>
   `;
