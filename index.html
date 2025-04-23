@@ -1,144 +1,391 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
 
 <head prefix="og: http://ogp.me/ns#">
-    <!-- Google Tag Manager -->
-    <script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-KG5RKWPQ');
-    </script>
-    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
-    <title>AIぬりえ | こどもが自分で作れる無料塗り絵アプリ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://coloring.zukan.com/" />
-    <meta name="description"
-        content="AIぬりえは、子どもが自分で塗り絵を作れる無料アプリ。文字入力不要で「なにが」「どうしている」を選ぶだけ。世界でひとつだけの塗り絵原画を簡単に作成できます。プリントして遊べる、創造力を育む新しい体験をお子さまと。">
-    <meta name="keywords" content="AIぬりえ, 塗り絵, こども, アプリ, 無料, オリジナル, AI, ズカンドットコム, クリエイティブ, 教育, プリント, 幼児, 小学生">
-    <meta name="author" content="株式会社ズカンドットコム">
-    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIぬりえ - こどもが自分でつくれる塗り絵アプリ</title>
+    <meta name="description" content="「なにが」「どうしてる」を選ぶだけで、世界でひとつのぬりえ原画をつくれるアプリ。プリンターで印刷して、創造の喜びをお子さまと一緒に。">
+
     <!-- OGP -->
-    <meta property="og:title" content="AIぬりえ | こどもが自分で作れる無料塗り絵アプリ">
-    <meta property="og:description" content="AIぬりえは、子どもが自分で塗り絵を作れる無料アプリ。世界でひとつだけの塗り絵原画を簡単に作成できます。">
-    <meta property="og:site_name" content="ズカンドットコム">
+    <meta property="og:title" content="AIぬりえ - こどもが自分でつくれる塗り絵アプリ">
+    <meta property="og:description" content="「なにが」「どうしてる」を選ぶだけで、世界でひとつのぬりえ原画をつくれるアプリ。プリンターで印刷して、創造の喜びをお子さまと一緒に。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://coloring.zukan.com/">
-    <meta property="og:image" content="https://coloring.zukan.com/image/PR_23.11-1.png">
+    <meta property="og:image" content="https://coloring.zukan.com/image/PR_25.04-1.png">
+    <meta property="og:site_name" content="AIぬりえ">
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AIぬりえ | こどもが自分で作れる無料塗り絵アプリ">
-    <meta name="twitter:description" content="AIぬりえは、子どもが自分で塗り絵を作れる無料アプリ。世界でひとつだけの塗り絵原画を簡単に作成できます。">
-    <meta name="twitter:image" content="https://coloring.zukan.com/image/PR_23.11-1.png">
+    <meta name="twitter:title" content="AIぬりえ - こどもが自分でつくれる塗り絵アプリ">
+    <meta name="twitter:description" content="「なにが」「どうしてる」を選ぶだけで、世界でひとつのぬりえ原画をつくれるアプリ。プリンターで印刷して、創造の喜びをお子さまと一緒に。">
+    <meta name="twitter:image" content="https://coloring.zukan.com/image/PR_25.04-1.png">
+
     <link rel="icon" type="image/png" href="https://zukan.com/static/img/favicon.png?rev=2">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .scroll-mask-x {
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+          }
+          .float-shadow {
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+          }
+          .hero-gradient {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,1) 100%);
+          }
+        }
+        details > summary {
+          list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+          display: none;
+        }
+      </style>
 </head>
 
-<body>
-    <main class="mx-auto max-w-4xl min-h-full grid place-items-center px-4 sm:px-8 py-12 sm:py-20 lg:px-12 text-center">
-        <h1 class="font-sans text-3xl sm:text-4xl font-bold mb-8">こどもが塗り絵をつくれるアプリ、AIぬりえ</h1>
-        <!-- Release commemorative banner -->
-        <div class="mb-8 w-full flex justify-center">
-            <div
-                class="animate-pulse bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 rounded-xl shadow-lg px-6 py-3 flex items-center gap-3 border-2 border-white/80">
-                <svg class="w-6 h-6 text-white drop-shadow" fill="none" stroke="currentColor" stroke-width="2"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="text-white font-bold text-lg sm:text-xl drop-shadow">リリース記念、全機能無料公開中！</span>
-            </div>
-        </div>
-        <img src="image/icon.png" alt="AIぬりえアプリのアイコン" class="rounded-4xl shadow-lg border border-gray-200 mb-8"
-            height="192" width="192">
-        <p class="text-base leading-7 text-gray-600 mb-4">
-            これまでのぬりえは、原画を大人が描くものでした。<br>
-            これからは、<b>子どもたちが自分が描きたい絵を描ける</b>ようになります。
-        </p>
-        <p class="text-base leading-7 text-gray-600 mb-4 px-2 sm:px-8">
-            AIぬりえは、文字を入力しなくても、<b>「なにが」「どうしている」を選ぶだけ</b>で、自分だけのぬりえ原画を作れるアプリです。
-            描くのは、世界でたったひとつのストーリー。
-        </p>
-        <p class="text-base leading-7 text-gray-600 mb-8 px-2 sm:px-8">
-            プリンターで印刷して使いますが、お気に入りの原画そのものをコレクションすることもできます。
-            複数回のブースイベントで大好評だったアプリです。
-            創造の喜びを、お子さまと一緒に楽しんでみてください。
-        </p>
-        <img class="w-full max-w-2xl mb-4 pt-8" src="image/PR_23.11-1.png">
-        <img class="w-full max-w-2xl mb-4" src="image/PR_24.03-1.png">
-        <img class="w-full max-w-2xl mb-8 pt-4" src="image/PR_24.03-2.png">
-        <p class="text-base leading-7 text-gray-600 mb-12">
-            先端のIT技術を発表する｢未踏会議｣（情報処理推進機構主催）のブースイベントで、来場のお子さまたちに描いてもらった原画です。
-            ｢きょうりゅうとしんかんせん｣など、思いがけない発想の絵で大盛りあがりでした。
-        </p>
-        <a href="https://apple.co/4c1brkD">
-            <img src="image/launch_on_AppStore.png" alt="AppStoreからAIぬりえをダウンロード" class="rounded-lg mb-8 mx-auto">
-        </a>
-        <p class="text-base leading-7 text-gray-600 mb-4">
-            Android版も開発中です。最新情報をお届けするニュースレターを購読ください。
-        </p>
-        <form action="https://pr.zukan.com/subscribe" method="POST" accept-charset="utf-8"
-            class="w-full max-w-md mx-auto mb-4">
-            <input type="hidden" name="list" value="FR8uLSg0v8KIg3MLeHCqUw" />
-            <input type="hidden" name="subform" value="yes" />
-            <div class="flex gap-2">
-                <input type="email" name="email" placeholder="メールアドレスを入力" required
-                    class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full leading-6 text-slate-900 placeholder-slate-400 rounded-md pl-4 ring-2 ring-slate-200 shadow-sm">
-                <button
-                    class="rounded-md bg-blue-600 px-6 py-2.5 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                    type="submit">購読する</button>
-            </div>
-        </form>
-        <p class="text-base leading-7 text-gray-400 text-sm mb-8">
-            購読解除は配信されるメールより行えます。<br>
-            <a href="https://zukan.com/privacy" class="font-semibold">プライバシーポリシー</a>をご確認ください。
-        </p>
-        <div class="flex flex-col gap-4 py-8 w-full max-w-xl mx-auto text-left">
-            <article class="flex items-center space-x-2">
-                <time datetime="2024-03-09" class="text-gray-500">
-                    25.03.25
-                </time>
-                <a class="text-blue-500 underline hover:no-underline max-w-xl" href="https://apple.co/4c1brkD">
-                    iOSアプリをリリース
-                </a>
-            </article>
-            <article class="flex items-center space-x-2">
-                <time datetime="2024-03-09" class="text-gray-500">
-                    25.03.09
-                </time>
-                <span class="max-w-xl">
-                    未踏会議2025で「AIぬりえ」を出展
-                </span>
-            </article>
-            <article class="flex items-center space-x-2">
-                <time datetime="2024-03-19" class="text-gray-500">
-                    24.03.19
-                </time>
-                <a href="https://presswalker.jp/press/38450"
-                    class="text-blue-500 underline hover:no-underline max-w-xl">
-                    【イベントレポート】未踏会議2024で「AIぬりえ」を出展。こどもたちの想像力がカラフルに爆発✨🎨
-                </a>
-            </article>
-            <article class="flex items-center space-x-2">
-                <time datetime="2023-11-09" class="text-gray-500">
-                    23.11.09
-                </time>
-                <a href="https://presswalker.jp/press/27802"
-                    class="text-blue-500 underline hover:no-underline max-w-xl">
-                    こどもたちが自ら創り出す、初めての塗り絵体験を。GPT4とDALL·Eを駆使した『AIぬりえアプリ』を開発中です。
-                </a>
-            </article>
-        </div>
-        <div class="pt-8">
-            <a href="https://corp.zukan.com">
-                <img src="image/zukan_logo_180@2x.png" width="180" alt="株式会社ズカンドットコム" title="株式会社ズカンドットコム">
+<body class="bg-white font-sans antialiased">
+    <!-- Header Placeholder (Optional: Add a simple header if needed) -->
+    <!-- <header class="py-4 shadow-sm">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <img src="image/icon.png" alt="AIぬりえ Logo" class="h-10 w-auto">
+            <a href="https://apple.co/4c1brkD" class="inline-block">
+                <img src="image/launch_on_AppStore.png" alt="AppStoreからダウンロード" class="h-10 w-auto">
             </a>
         </div>
+    </header> -->
+
+    <!-- Hero Section - Full Width without margins -->
+    <section id="hero" class="relative w-full mb-24">
+        <!-- Main visual as background -->
+        <div
+            class="relative w-full h-[75vh] min-h-[700px] max-h-[1000px] bg-gradient-to-b from-blue-50 to-white overflow-hidden">
+            <!-- Background image with gradient overlay -->
+            <div class="absolute inset-0 w-full h-full">
+                <img src="image/PR_25.04-1.png" alt="AIぬりえのデモ画面"
+                    class="w-full h-full object-cover object-center opacity-90" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-b from-white/0 via-white/40 to-white"></div>
+            </div>
+
+            <!-- Content positioned over the background -->
+            <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8 pt-0 pb-12"
+                style="justify-content: flex-start; padding-top: 35vh;">
+                <!-- Floating logo icon with enhanced shadow effect -->
+                <div class="relative mt-16 sm:mt-8 mb-8 animate-bounce animation-delay-200"
+                    style="animation: float 6s ease-in-out infinite;">
+                    <img src="image/icon.png" alt="AIぬりえアプリのアイコン"
+                        class="rounded-3xl shadow-xl mb-0 mx-auto w-28 h-28 sm:w-36 sm:h-36 float-shadow transform hover:scale-105 transition-all"
+                        loading="lazy">
+                    <div class="absolute -inset-1 bg-blue-500 rounded-3xl blur-md opacity-20 -z-10"></div>
+                </div>
+
+                <div class="text-center max-w-3xl mx-auto mt-4">
+                    <h1
+                        class="text-4xl sm:text-4xl lg:text-5xl font-extrabold mb-5 text-slate-900 tracking-tight leading-tight">
+                        <span class="whitespace-nowrap">こどもが<span class="text-blue-600">ぬりえ</span>を</span><span
+                            class="whitespace-nowrap">つくれるアプリ</span> <br>
+                        <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">AIぬりえ</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Add custom animation for floating effect -->
+            <style>
+                @keyframes float {
+                    0% {
+                        transform: translateY(0px);
+                    }
+
+                    50% {
+                        transform: translateY(-10px);
+                    }
+
+                    100% {
+                        transform: translateY(0px);
+                    }
+                }
+
+                .animate-float {
+                    animation: float 6s ease-in-out infinite;
+                }
+            </style>
+    </section>
+
+    <!-- Main Content Container - with padding for readability -->
+    <main class="mx-auto min-h-full px-4 py-0 sm:px-6 lg:px-8 sm:py-0">
+        <!-- UI Demo Slider -->
+        <section id="demo" class="w-full max-w-5xl mx-auto mb-16 sm:mb-24 px-4 sm:px-6 lg:px-8">
+            <div class="grid place-items-center">
+                <p class="text-lg sm:text-xl leading-8 text-slate-700 mb-8 max-w-2xl mx-auto">
+                    なにが・どうしてる を選ぶだけ。<br>世界でたったひとつのぬりえをAIと一緒につくろう。
+                </p>
+
+
+                <div class="mb-16">
+                    <a href="https://apple.co/4c1brkD"
+                        class="inline-block transition-transform hover:scale-105 animate-pulse animation-delay-700"
+                        style="animation: pulse 3s infinite;">
+                        <img src="image/launch_on_AppStore.png" alt="AppStoreからAIぬりえをダウンロード"
+                            class="rounded-lg shadow-lg mx-auto w-88" loading="lazy">
+                        <div class="mt-2 text-sm text-blue-600 font-medium">今すぐダウンロード</div>
+                    </a>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center text-slate-900 w-full">AIぬりえの楽しみ方</h2>
+
+                <!-- More accurate representation of the app's functionality -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 w-full max-w-5xl mx-auto">
+                    <figure class="flex flex-col items-center">
+                        <div class="bg-white p-2 rounded-xl shadow-lg mb-3 w-full">
+                            <img src="image/PR_25.04-2.png"
+                                alt="AIぬりえ UIデモ1: ドロップダウンブロック UI とアイコンパレット。「およいでる＋きょうりゅう」など複数キーワードを組み合わせる操作例。"
+                                class="rounded-lg w-full h-auto" loading="lazy">
+                        </div>
+                        <figcaption class="text-base font-medium text-slate-700 text-center">
+                            キーワードを自由に組み合わせ
+                        </figcaption>
+                    </figure>
+
+                    <figure class="flex flex-col items-center">
+                        <div class="bg-white p-2 rounded-xl shadow-lg mb-3 w-full">
+                            <img src="image/PR_25.04-3.png"
+                                alt="AIぬりえ UIデモ2: スマホを斜めに撮ったモック。青い選択ボックスと魔法の杖アイコン、周囲にユニコーン・アヒルなど 3D 風アイコンが浮かぶ。"
+                                class="rounded-lg w-full h-auto" loading="lazy">
+                        </div>
+                        <figcaption class="text-base font-medium text-slate-700 text-center">
+                            ことばが読めなくてもアイコンでわかる
+                        </figcaption>
+                    </figure>
+
+                    <figure class="flex flex-col items-center">
+                        <div class="bg-white p-2 rounded-xl shadow-lg mb-3 w-full">
+                            <img src="image/PR_25.04-5.png"
+                                alt="AIぬりえ UIデモ3: 12 枚の生成済み線画サムネイルを 4×3 グリッドで並べたギャラリー。「はしってる しんかんせん」など例題付き。"
+                                class="rounded-lg w-full h-auto" loading="lazy">
+                        </div>
+                        <figcaption class="text-base font-medium text-slate-700 text-center">
+                            世界でたったひとつのぬりえが完成
+                        </figcaption>
+                    </figure>
+
+                    <figure class="flex flex-col items-center">
+                        <div class="bg-white p-2 rounded-xl shadow-lg mb-3 w-full">
+                            <img src="image/PR_24.03-1.png" alt="塗り絵の完成例: お子さまたちが色を塗った作品例"
+                                class="rounded-lg w-full h-auto" loading="lazy">
+                        </div>
+                        <figcaption class="text-base font-medium text-slate-700 text-center"></figcaption>
+                        印刷して自由に色を塗ろう
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="mt-8 max-w-3xl mx-auto px-4">
+                    <div class="w-full max-w-xl">
+                        <img class="w-full mb-8 pt-4" src="image/PR_25.04-4.png" alt="アプリのスクリーンショット">
+                        <p class="text-base leading-7 text-gray-600 mb-8 max-w-prose mx-auto">
+                            これまでのぬりえは、原画を大人が描くものでした。これからは、<b>こどもたちが自分が描きたい絵を描ける</b>ようになります。
+                            「宇宙を冒険するネコ」「虹の上を走るユニコーン」など自由な発想を、美しい線画イラストに変換します。
+                            作ったぬりえはプリンターで印刷して楽しめます。
+                        </p>
+                        <img class="w-full mb-8 pt-4 rounded" src="image/PR_24.03-2.png" alt="イベントで自分で作ったぬりえを塗っているこども達">
+                        <p class="text-base leading-7 text-gray-600 max-w-prose mx-auto">
+                            先端のIT技術を発表する｢未踏会議｣（情報処理推進機構主催）のブースイベントで、来場のお子さまたちに描いてもらった原画です。
+                            ｢きょうりゅうとしんかんせん｣など、思いがけない発想の絵で大盛りあがりでした。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section id="newsletter"
+            class="w-full max-w-2xl mx-auto mb-8 sm:mb-24 text-center bg-slate-50 p-8 sm:p-10 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-bold mb-4 text-slate-900">Android版も開発中！</h2>
+            <p class="text-base leading-7 text-slate-600 mb-6">
+                最新情報をお届けするニュースレターにご登録ください。
+            </p>
+            <form action="https://pr.zukan.com/subscribe" method="POST" accept-charset="utf-8"
+                class="w-full max-w-md mx-auto mb-5">
+                <input type="hidden" name="list" value="FR8uLSg0v8KIg3MLeHCqUw" />
+                <input type="hidden" name="subform" value="yes" />
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" name="email" placeholder="メールアドレスを入力" required
+                        class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full leading-6 text-slate-900 placeholder-slate-400 rounded-lg px-4 py-2.5 ring-1 ring-slate-300 shadow-sm bg-white">
+                    <button
+                        class="rounded-lg bg-blue-600 px-6 py-2.5 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors flex-shrink-0 cursor-pointer"
+                        type="submit">登録する</button>
+                </div>
+            </form>
+            <p class="text-sm leading-6 text-slate-500">
+                購読解除は配信メールから行えます。<br>
+                <a href="https://zukan.com/privacy"
+                    class="font-semibold text-blue-600 hover:text-blue-700 underline">プライバシーポリシー</a>をご確認ください。
+            </p>
+        </section>
+
+        <div class="flex flex-row gap-4 justify-center mb-16">
+            <figure class="min-w-[80px] max-w-[120px]">
+                <img src="image/PR_25.04-8.png" alt="イメージ画像" class="rounded-xl w-full" loading="lazy">
+            </figure>
+            <figure class="min-w-[80px] max-w-[120px]">
+                <img src="image/PR_25.04-9.png" alt="イメージ画像" class="rounded-xl w-full" loading="lazy">
+            </figure>
+            <figure class="min-w-[80px] max-w-[120px]">
+                <img src="image/PR_25.04-10.png" alt="イメージ画像" class="rounded-xl w-full" loading="lazy">
+            </figure>
+        </div>
+
+        <!-- News / Press Section -->
+        <section id="news" class="w-full max-w-2xl mx-auto text-left mb-16 sm:mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center text-slate-900">お知らせ</h2>
+            <div class="flex flex-col gap-5 py-6 border-t border-slate-200">
+                <article
+                    class="flex flex-col sm:flex-row items-start gap-2 sm:gap-4 pb-5 border-b border-slate-200 last:border-b-0 last:pb-0">
+                    <time datetime="2025-04-22" class="text-slate-500 w-20 flex-shrink-0 font-medium">
+                        2025.04.22
+                    </time>
+                    <a class="text-blue-600 hover:text-blue-700 underline font-medium"
+                        href="https://presswalker.jp/press/73763">
+                        「AIぬりえ」App Storeでリリース
+                    </a>
+                </article>
+                <article
+                    class="flex flex-col sm:flex-row items-start gap-2 sm:gap-4 pb-5 border-b border-slate-200 last:border-b-0 last:pb-0">
+                    <time datetime="2025-03-09" class="text-slate-500 w-20 flex-shrink-0 font-medium">
+                        2025.03.09
+                    </time>
+                    <span class="text-slate-800">
+                        未踏会議2025で「AIぬりえ」を出展
+                    </span>
+                </article>
+                <article
+                    class="flex flex-col sm:flex-row items-start gap-2 sm:gap-4 pb-5 border-b border-slate-200 last:border-b-0 last:pb-0">
+                    <time datetime="2024-03-19" class="text-slate-500 w-20 flex-shrink-0 font-medium">
+                        2024.03.19
+                    </time>
+                    <a href="https://presswalker.jp/press/38450"
+                        class="text-blue-600 hover:text-blue-700 underline font-medium">
+                        【イベントレポート】未踏会議2024で「AIぬりえ」を出展。こどもたちの想像力がカラフルに爆発✨🎨
+                    </a>
+                </article>
+                <article
+                    class="flex flex-col sm:flex-row items-start gap-2 sm:gap-4 pb-5 border-b border-slate-200 last:border-b-0 last:pb-0">
+                    <time datetime="2023-11-09" class="text-slate-500 w-20 flex-shrink-0 font-medium">
+                        2023.11.09
+                    </time>
+                    <a href="https://presswalker.jp/press/27802"
+                        class="text-blue-600 hover:text-blue-700 underline font-medium">
+                        こどもたちが自ら創り出す、初めての塗り絵体験を。GPT4とDALL·Eを駆使した『AIぬりえアプリ』を開発中です。
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="w-full max-w-3xl mx-auto text-left mb-16 sm:mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center text-slate-900">FAQ（よくあるご質問）</h2>
+            <div class="space-y-4">
+                <details class="group rounded-xl bg-slate-50 p-6 shadow-md transition-colors hover:bg-slate-100">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900">
+                        <h3 class="text-lg font-semibold">Q1: 「生成AIによる塗り絵」はどのような仕組みですか？</h3>
+                        <svg class="size-5 shrink-0 transition duration-300 group-open:-rotate-180 text-slate-500"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </summary>
+                    <div class="mt-4 leading-relaxed text-slate-700 prose prose-slate max-w-none">
+                        <p>入力したキーワードや文化背景、対象年齢等から画像生成向けの情景描写文をGPT-4oで作成し、それを画像生成AIモデル（OpenAI DALL·E 3, Google Imagen
+                            3）へ入力して線画画像として出力する仕組みです。画像生成AIモデルは得意領域によって使い分けられています。</p>
+                    </div>
+                </details>
+
+                <details class="group rounded-xl bg-slate-50 p-6 shadow-md transition-colors hover:bg-slate-100">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900">
+                        <h3 class="text-lg font-semibold">Q2: こどもが使っても安全ですか？不適切・危険な画像の生成は防げますか？</h3>
+                        <svg class="size-5 shrink-0 transition duration-300 group-open:-rotate-180 text-slate-500"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </summary>
+                    <div class="mt-4 leading-relaxed text-slate-700 prose prose-slate max-w-none">
+                        <p>はい、安全性は最重視しています。キーワード入力段階で独自のエージェントAIが不適切ワードや権利侵害表現をフィルタリングし、画像生成AI自体にもコンテンツフィルター機能があります。</p>
+                    </div>
+                </details>
+
+                <details class="group rounded-xl bg-slate-50 p-6 shadow-md transition-colors hover:bg-slate-100">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900">
+                        <h3 class="text-lg font-semibold">Q3: 将来的に有料になりますか？</h3>
+                        <svg class="size-5 shrink-0 transition duration-300 group-open:-rotate-180 text-slate-500"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </summary>
+                    <div class="mt-4 leading-relaxed text-slate-700 prose prose-slate max-w-none">
+                        <p>現在はリリース記念で全機能が無料・無制限でご利用いただけます。将来的には、塗り絵の「生成」機能についてサブスクリプション（定額課金）モデルを導入する予定です。ただし、「みつける」タブでの塗り絵利用や、過去に生成され誰もコレクションしていない塗り絵の再利用などは無料で提供し、無料ユーザーでも十分楽しめるアプリを目指します。
+                        </p>
+                    </div>
+                </details>
+
+                <details class="group rounded-xl bg-slate-50 p-6 shadow-md transition-colors hover:bg-slate-100">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900">
+                        <h3 class="text-lg font-semibold">Q4: 生成された塗り絵の著作権はどうなりますか？学校で使っても良いですか？</h3>
+                        <svg class="size-5 shrink-0 transition duration-300 group-open:-rotate-180 text-slate-500"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </summary>
+                    <div class="mt-4 leading-relaxed text-slate-700 prose prose-slate max-w-none">
+                        <p>生成された塗り絵の著作権は株式会社ズカンドットコムに帰属します。個人や家庭内で楽しむ範囲でのご利用は自由です。学校の授業など、教育目的での利用（複製・配布含む）は著作権法第35条に基づき許諾なくご利用いただけます。商業利用や法人利用については別途お問い合わせください。詳細については
+                            <a href="https://zukan.github.io/terms/coloring.zukan.com/terms_of_service_ja.md"
+                                class="text-blue-600 hover:text-blue-700 underline">利用規約</a>をご確認ください。
+                        </p>
+                    </div>
+                </details>
+
+                <details class="group rounded-xl bg-slate-50 p-6 shadow-md transition-colors hover:bg-slate-100">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900">
+                        <h3 class="text-lg font-semibold">Q5: アプリ内で直接色を塗ることはできますか？</h3>
+                        <svg class="size-5 shrink-0 transition duration-300 group-open:-rotate-180 text-slate-500"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </summary>
+                    <div class="mt-4 leading-relaxed text-slate-700 prose prose-slate max-w-none">
+                        <p>本アプリ内に塗り絵機能はありません。紙に印刷してお楽しみください。お持ちのお絵描きアプリ等に画像を転送してデジタルで色塗りをお楽しみいただくこともできます。</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-12 border-t border-slate-200 w-full max-w-5xl mx-auto text-center bg-white">
+            <p class="text-base leading-7 text-slate-600 mb-6">
+                技術的なお問い合わせや共同研究、業務提携に関するご相談は、<br class="hidden sm:inline">
+                <a href="mailto:info@zukan.com"
+                    class="text-blue-600 hover:text-blue-700 underline font-medium">info@zukan.com</a>
+                までお気軽にご連絡ください。
+            </p>
+            <!-- Legal links section -->
+            <div class="flex justify-center flex-wrap gap-x-8 gap-y-2 mb-6 text-sm text-slate-500">
+                <a href="https://zukan.github.io/terms/coloring.zukan.com/terms_of_service_ja.md"
+                    class="hover:text-blue-600 transition-colors">利用規約</a>
+                <a href="https://zukan.com/privacy" class="hover:text-blue-600 transition-colors">プライバシーポリシー</a>
+            </div>
+            <div class="flex justify-center items-center gap-4 pt-4">
+                <a href="https://corp.zukan.com" class="hover:opacity-80 transition-opacity">
+                    <img src="image/zukan_logo_180@2x.png" width="160" alt="株式会社ズカンドットコム" title="株式会社ズカンドットコム"
+                        loading="lazy">
+                </a>
+            </div>
+            <p class="text-xs text-slate-400 mt-6 mb-8">© 2025 zukan.com Inc. All rights reserved.</p>
+        </footer>
     </main>
     <script src="script.js"></script>
 </body>
