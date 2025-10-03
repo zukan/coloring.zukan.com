@@ -74,7 +74,16 @@
             object-fit: contain;
         }
 
-        .download-btn {
+        .save-guide {
+            background: #f0f0f0;
+            color: #666;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .video-link {
             display: inline-block;
             background: #007AFF;
             color: white;
@@ -83,17 +92,11 @@
             border-radius: 8px;
             font-size: 16px;
             font-weight: 500;
-            transition: background 0.2s;
-            cursor: pointer;
-            border: none;
+            margin-top: 8px;
         }
 
-        .download-btn:hover {
+        .video-link:active {
             background: #0051D5;
-        }
-
-        .download-btn:active {
-            background: #004BB8;
         }
 
         .error {
@@ -148,7 +151,7 @@
                     <div class="media-wrapper landscape" id="imageWrapper">
                         <img src="${imageUrl}" alt="ぬりえ作品" id="mainImage" onload="detectOrientation(this)" onerror="handleError()">
                     </div>
-                    <a href="${imageUrl}" download="nurie_${key}.png" class="download-btn">画像をダウンロード</a>
+                    <div class="save-guide">画像を長押しして保存してください（iPhone:「写真に保存」/ Android:「画像をダウンロード」）</div>
                 </div>
 
                 <div class="media-section">
@@ -156,7 +159,14 @@
                     <div class="media-wrapper landscape" id="videoWrapper">
                         <video src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
                     </div>
-                    <a href="${videoUrl}" download="animation_${key}.mp4" class="download-btn">動画をダウンロード</a>
+                    <div class="save-guide">
+                        <a href="${videoUrl}" class="video-link" download="animation_${key}.mp4">動画をダウンロード</a><br>
+                        上のボタンをタップしてダウンロードしてください<br>
+                        <small style="color: #999; margin-top: 8px; display: block;">
+                        iPhone: ファイルアプリに保存→シェアボタンから「ビデオを保存」で写真アプリへ<br>
+                        Android: ダウンロードフォルダに保存されます
+                        </small>
+                    </div>
                 </div>
             `;
         }
