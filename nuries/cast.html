@@ -141,38 +141,51 @@
             const imageUrl = `${baseUrl}/nurie.png`;
             const videoUrl = `${baseUrl}/sample_0.mp4`;
 
-            // 画像の向きを検出
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-
-            img.onload = function() {
-                const isPortrait = img.height > img.width;
-                const orientation = isPortrait ? 'portrait' : 'landscape';
-
-                document.getElementById('content').innerHTML = `
-                    <div class="media-section">
-                        <h2>ぬりえ画像</h2>
-                        <div class="media-wrapper ${orientation}">
-                            <img src="${imageUrl}" alt="ぬりえ作品">
-                        </div>
-                        <a href="${imageUrl}" download="nurie_${key}.png" class="download-btn">画像をダウンロード</a>
+            // HTMLを先に表示して、読み込み後に向きを判定
+            document.getElementById('content').innerHTML = `
+                <div class="media-section">
+                    <h2>ぬりえ画像</h2>
+                    <div class="media-wrapper landscape" id="imageWrapper">
+                        <img src="${imageUrl}" alt="ぬりえ作品" id="mainImage" onload="detectOrientation(this)" onerror="handleError()">
                     </div>
+                    <a href="${imageUrl}" download="nurie_${key}.png" class="download-btn">画像をダウンロード</a>
+                </div>
 
-                    <div class="media-section">
-                        <h2>アニメーション動画</h2>
-                        <div class="media-wrapper ${orientation}">
-                            <video src="${videoUrl}" controls playsinline></video>
-                        </div>
-                        <a href="${videoUrl}" download="animation_${key}.mp4" class="download-btn">動画をダウンロード</a>
+                <div class="media-section">
+                    <h2>アニメーション動画</h2>
+                    <div class="media-wrapper landscape" id="videoWrapper">
+                        <video src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
                     </div>
-                `;
-            };
+                    <a href="${videoUrl}" download="animation_${key}.mp4" class="download-btn">動画をダウンロード</a>
+                </div>
+            `;
+        }
 
-            img.onerror = function() {
-                document.getElementById('content').innerHTML = '<div class="error">作品が見つかりませんでした</div>';
-            };
+        function detectOrientation(img) {
+            const isPortrait = img.naturalHeight > img.naturalWidth;
+            const wrapper = document.getElementById('imageWrapper');
+            const videoWrapper = document.getElementById('videoWrapper');
 
-            img.src = imageUrl;
+            if (isPortrait) {
+                wrapper.classList.remove('landscape');
+                wrapper.classList.add('portrait');
+                videoWrapper.classList.remove('landscape');
+                videoWrapper.classList.add('portrait');
+            }
+        }
+
+        function detectVideoOrientation(video) {
+            const isPortrait = video.videoHeight > video.videoWidth;
+            const wrapper = document.getElementById('videoWrapper');
+
+            if (isPortrait) {
+                wrapper.classList.remove('landscape');
+                wrapper.classList.add('portrait');
+            }
+        }
+
+        function handleError() {
+            document.getElementById('content').innerHTML = '<div class="error">作品が見つかりませんでした</div>';
         }
     </script>
 </body>
