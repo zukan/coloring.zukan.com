@@ -87,21 +87,11 @@
             line-height: 1.6;
         }
 
-        .download-btn {
-            display: inline-block;
-            background: #007AFF;
-            color: white;
-            text-decoration: none;
-            padding: 12px 32px;
-            border-radius: 8px;
+        .download-link {
+            color: #007AFF;
+            text-decoration: underline;
             font-size: 16px;
             font-weight: 500;
-            border: none;
-            cursor: pointer;
-        }
-
-        .download-btn:active {
-            background: #0051D5;
         }
 
         .error {
@@ -165,46 +155,14 @@
                         <video src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
                     </div>
                     <div class="save-guide">
-                        <button class="download-btn" onclick="downloadVideo('${videoUrl}', 'animation_${key}.mp4')">動画をダウンロード</button><br>
-                        <small style="color: #999; margin-top: 8px; display: block;" id="videoGuide">
-                        タップしてダウンロードしてください
+                        <a href="${videoUrl}" class="download-link" download="">動画をダウンロード</a><br>
+                        <small style="color: #999; margin-top: 8px; display: block;">
+                        iPhone: ファイルアプリに保存→シェアボタンから「ビデオを保存」で写真アプリへ<br>
+                        Android: ダウンロードフォルダに保存されます
                         </small>
                     </div>
                 </div>
             `;
-        }
-
-        async function downloadVideo(videoUrl, filename) {
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-            try {
-                // iOS 15+でWeb Share APIを使用
-                if (isIOS && navigator.canShare) {
-                    const response = await fetch(videoUrl);
-                    const blob = await response.blob();
-                    const file = new File([blob], filename, { type: 'video/mp4' });
-
-                    if (navigator.canShare({ files: [file] })) {
-                        await navigator.share({ files: [file] });
-                        return;
-                    }
-                }
-
-                // フォールバック: 通常のダウンロード
-                const a = document.createElement('a');
-                a.href = videoUrl;
-                a.download = filename;
-                a.click();
-
-            } catch (error) {
-                if (error.name === 'AbortError') {
-                    // ユーザーがキャンセル
-                    return;
-                }
-                console.error('ダウンロードエラー:', error);
-                // エラー時は新しいウィンドウで開く
-                window.open(videoUrl, '_blank');
-            }
         }
 
         function detectOrientation(img) {
