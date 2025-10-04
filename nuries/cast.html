@@ -83,20 +83,11 @@
             line-height: 1.6;
         }
 
-        .video-link {
-            display: inline-block;
-            background: #007AFF;
-            color: white;
-            text-decoration: none;
-            padding: 12px 32px;
-            border-radius: 8px;
+        .download-link {
+            color: #007AFF;
+            text-decoration: underline;
             font-size: 16px;
             font-weight: 500;
-            margin-top: 8px;
-        }
-
-        .video-link:active {
-            background: #0051D5;
         }
 
         .error {
@@ -160,8 +151,7 @@
                         <video src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
                     </div>
                     <div class="save-guide">
-                        <a href="${videoUrl}" class="video-link" download="animation_${key}.mp4">動画をダウンロード</a><br>
-                        上のボタンをタップしてダウンロードしてください<br>
+                        <a href="${videoUrl}" class="download-link" download="animation_${key}.mp4">動画をダウンロード</a><br>
                         <small style="color: #999; margin-top: 8px; display: block;">
                         iPhone: ファイルアプリに保存→シェアボタンから「ビデオを保存」で写真アプリへ<br>
                         Android: ダウンロードフォルダに保存されます
