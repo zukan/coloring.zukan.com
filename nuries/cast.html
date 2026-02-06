@@ -78,26 +78,6 @@
             object-fit: contain;
         }
 
-        .video-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: linear-gradient(
-                180deg,
-                rgba(0, 0, 0, 0.35) 0%,
-                rgba(0, 0, 0, 0.2) 40%,
-                rgba(0, 0, 0, 0.35) 100%
-            );
-            z-index: 2;
-        }
-
-        .video-overlay.hidden {
-            display: none;
-        }
-
         .ios-only {
             display: none;
         }
@@ -114,35 +94,6 @@
             display: none;
         }
 
-        .video-overlay.ios-only {
-            display: none;
-        }
-
-        .is-ios .video-overlay.ios-only {
-            display: flex;
-        }
-
-        .overlay-button {
-            border: none;
-            border-radius: 999px;
-            padding: 12px 20px;
-            min-height: 44px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-        }
-
-        .overlay-button.play {
-            background: #ffffff;
-            color: #111;
-        }
-
-        .overlay-button.share {
-            background: #007AFF;
-            color: #fff;
-        }
-
         .save-guide {
             background: #f0f0f0;
             color: #666;
@@ -157,6 +108,22 @@
             text-decoration: underline;
             font-size: 16px;
             font-weight: 500;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 20px;
+            min-height: 44px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #007AFF;
+            color: #fff;
+            margin-bottom: 8px;
         }
 
         .error {
@@ -218,23 +185,20 @@
                     <h2>アニメーション動画</h2>
                     <div class="media-wrapper landscape" id="videoWrapper">
                         <video id="mainVideo" src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
-                        <div class="video-overlay ios-only" id="videoOverlay">
-                            <button class="overlay-button play" id="playButton" type="button">再生</button>
-                            <button class="overlay-button share" id="shareButton" type="button">保存・共有</button>
-                        </div>
                     </div>
                     <div class="save-guide">
                         <div class="ios-only">
-                            保存・共有ボタンから共有シートを開いて保存できます。<br>
+                            <button class="download-button" id="iosDownloadButton" type="button">動画を保存</button><br>
                             <small style="color: #999; margin-top: 8px; display: block;">
-                            共有が使えない場合は新規タブで動画が開きます。必要ならファイルアプリに保存後、写真へ追加してください。
+                            1. ボタンで動画を開きます。<br>
+                            2. 共有ボタンから「ビデオを保存」を選択してください。<br>
+                            端末によっては一度ファイルに保存してから写真へ追加します。
                             </small>
                         </div>
                         <div class="non-ios-only">
                             <a href="${videoUrl}" class="download-link" download="">動画をダウンロード</a><br>
                             <small style="color: #999; margin-top: 8px; display: block;">
-                            iPhone: ファイルアプリに保存→シェアボタンから「ビデオを保存」で写真アプリへ<br>
-                            Android: ダウンロードフォルダに保存されます
+                            ダウンロード後は、端末のダウンロードフォルダからご確認ください。
                             </small>
                         </div>
                     </div>
@@ -253,40 +217,17 @@
 
             document.documentElement.classList.add("is-ios");
 
-            const video = document.getElementById("mainVideo");
-            const overlay = document.getElementById("videoOverlay");
-            const playButton = document.getElementById("playButton");
-            const shareButton = document.getElementById("shareButton");
+            const downloadButton = document.getElementById("iosDownloadButton");
 
-            if (!video || !overlay || !playButton || !shareButton) {
+            if (!downloadButton) {
                 return;
             }
 
-            video.style.pointerEvents = "none";
-
-            playButton.addEventListener("click", () => {
-                overlay.classList.add("hidden");
-                video.style.pointerEvents = "auto";
-                const playPromise = video.play();
-                if (playPromise && typeof playPromise.catch === "function") {
-                    playPromise.catch(() => {
-                        overlay.classList.remove("hidden");
-                        video.style.pointerEvents = "none";
-                    });
+            downloadButton.addEventListener("click", () => {
+                const opened = window.open(videoUrl, "_blank", "noopener");
+                if (!opened) {
+                    window.location.href = videoUrl;
                 }
-            });
-
-            shareButton.addEventListener("click", async () => {
-                try {
-                    if (navigator.share && (!navigator.canShare || navigator.canShare({ url: videoUrl }))) {
-                        await navigator.share({ title: "AIぬりえ - アニメーション動画", url: videoUrl });
-                        return;
-                    }
-                } catch (error) {
-                    // Fallback to opening the video in a new tab.
-                }
-
-                window.open(videoUrl, "_blank", "noopener");
             });
         }
 
