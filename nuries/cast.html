@@ -78,6 +78,71 @@
             object-fit: contain;
         }
 
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.35) 0%,
+                rgba(0, 0, 0, 0.2) 40%,
+                rgba(0, 0, 0, 0.35) 100%
+            );
+            z-index: 2;
+        }
+
+        .video-overlay.hidden {
+            display: none;
+        }
+
+        .ios-only {
+            display: none;
+        }
+
+        .non-ios-only {
+            display: block;
+        }
+
+        .is-ios .ios-only {
+            display: block;
+        }
+
+        .is-ios .non-ios-only {
+            display: none;
+        }
+
+        .video-overlay.ios-only {
+            display: none;
+        }
+
+        .is-ios .video-overlay.ios-only {
+            display: flex;
+        }
+
+        .overlay-button {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 20px;
+            min-height: 44px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .overlay-button.play {
+            background: #ffffff;
+            color: #111;
+        }
+
+        .overlay-button.share {
+            background: #007AFF;
+            color: #fff;
+        }
+
         .save-guide {
             background: #f0f0f0;
             color: #666;
@@ -152,17 +217,77 @@
                 <div class="media-section">
                     <h2>アニメーション動画</h2>
                     <div class="media-wrapper landscape" id="videoWrapper">
-                        <video src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
+                        <video id="mainVideo" src="${videoUrl}" controls playsinline onloadedmetadata="detectVideoOrientation(this)"></video>
+                        <div class="video-overlay ios-only" id="videoOverlay">
+                            <button class="overlay-button play" id="playButton" type="button">再生</button>
+                            <button class="overlay-button share" id="shareButton" type="button">保存・共有</button>
+                        </div>
                     </div>
                     <div class="save-guide">
-                        <a href="${videoUrl}" class="download-link" download="">動画をダウンロード</a><br>
-                        <small style="color: #999; margin-top: 8px; display: block;">
-                        iPhone: ファイルアプリに保存→シェアボタンから「ビデオを保存」で写真アプリへ<br>
-                        Android: ダウンロードフォルダに保存されます
-                        </small>
+                        <div class="ios-only">
+                            保存・共有ボタンから共有シートを開いて保存できます。<br>
+                            <small style="color: #999; margin-top: 8px; display: block;">
+                            共有が使えない場合は新規タブで動画が開きます。必要ならファイルアプリに保存後、写真へ追加してください。
+                            </small>
+                        </div>
+                        <div class="non-ios-only">
+                            <a href="${videoUrl}" class="download-link" download="">動画をダウンロード</a><br>
+                            <small style="color: #999; margin-top: 8px; display: block;">
+                            iPhone: ファイルアプリに保存→シェアボタンから「ビデオを保存」で写真アプリへ<br>
+                            Android: ダウンロードフォルダに保存されます
+                            </small>
+                        </div>
                     </div>
                 </div>
             `;
+
+            setupIosVideoActions(videoUrl);
+        }
+
+        function setupIosVideoActions(videoUrl) {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+                || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+            if (!isIOS) {
+                return;
+            }
+
+            document.documentElement.classList.add("is-ios");
+
+            const video = document.getElementById("mainVideo");
+            const overlay = document.getElementById("videoOverlay");
+            const playButton = document.getElementById("playButton");
+            const shareButton = document.getElementById("shareButton");
+
+            if (!video || !overlay || !playButton || !shareButton) {
+                return;
+            }
+
+            video.style.pointerEvents = "none";
+
+            playButton.addEventListener("click", () => {
+                overlay.classList.add("hidden");
+                video.style.pointerEvents = "auto";
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === "function") {
+                    playPromise.catch(() => {
+                        overlay.classList.remove("hidden");
+                        video.style.pointerEvents = "none";
+                    });
+                }
+            });
+
+            shareButton.addEventListener("click", async () => {
+                try {
+                    if (navigator.share && (!navigator.canShare || navigator.canShare({ url: videoUrl }))) {
+                        await navigator.share({ title: "AIぬりえ - アニメーション動画", url: videoUrl });
+                        return;
+                    }
+                } catch (error) {
+                    // Fallback to opening the video in a new tab.
+                }
+
+                window.open(videoUrl, "_blank", "noopener");
+            });
         }
 
         function detectOrientation(img) {
